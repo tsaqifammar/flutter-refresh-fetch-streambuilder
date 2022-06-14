@@ -27,7 +27,7 @@ class Album {
 }
 
 Future<Album> fetchData(int id) async {
-  final response = await http.get(Uri.parse('htps://jsonplaceholder.typicode.com/albums/$id'));
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/$id'));
 
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body));
@@ -90,9 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
 
       body: Center(
-        child: StreamBuilder(
+        child: StreamBuilder<Album?>(
           stream: _events.stream,
-          builder: (BuildContext context, AsyncSnapshot<Album?> snapshot) {
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
                 children: [
